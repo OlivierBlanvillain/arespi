@@ -5,6 +5,7 @@
 // List of google groups members:
 // https://docs.google.com/spreadsheets/d/1NPSvH2itaTkOpEYHRoTYoZdgoEKiGFOtWsrTOinr3vg/export?format=csv
 
+$rooturl = 'http://localhost:80';
 
 // Show errors
 error_reporting(E_ALL);
@@ -19,7 +20,7 @@ require_once "./google-api-php-client/src/Google/Service/Oauth2.php";
 // Store values in variables from project created in Google Developer Console
 $client_id = '834497997783-7l4hdqqbjc79phkrl9s1k1ra7h032poc.apps.googleusercontent.com';
 $client_secret = 'W0M4bsbKxmIYfBethxy52mzp';
-$redirect_uri = 'http://localhost:80/authentication.php';
+$redirect_uri = $rooturl . '/authentication.php';
 $simple_api_key = 'AIzaSyBUK5qxC5DULFTHej2xRfGhoJDX7QbeYLc';
 
 // Create Client Request to access Google API
@@ -70,7 +71,7 @@ if ($client->getAccessToken()) {
       <? }else{ ?>
         <header id="info">
           <a target="_blank" class="user_name" href="<? echo $userData->link; ?>" /><img class="user_img" src="<? echo $userData->picture; ?>" width="15%" />
-          <? echo '<p class="welcome"><i>Welcome ! </i>' . $userData->name . "</p>"; ?></a><a class='logout' href='https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=<? echo "base_url();" ?>index.php/user_authentication/logout'>Logout</a>
+          <? echo '<p class="welcome"><i>Welcome ! </i>' . $userData->name . "</p>"; ?></a><a class='logout' href='https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=<? echo $rooturl ?>/logout.php'>Logout</a>
         </header>
       <?
       echo "<p class='profile'>Profile :-</p>";
